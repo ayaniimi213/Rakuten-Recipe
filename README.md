@@ -20,8 +20,11 @@ PostgreSQLはUTF-8のチェックが厳しいので、いくつかの文字が�
 
 - 楽天データセットから楽天レシピを入手
 - normalization.shを使ってデータの正規化
--- recipe_all_20120705.txtの234685行目と280174行目を手動で修正
+ - recipe_all_20120705.txtの234685行目と280174行目を手動で修正
 - create.sqlを使って、データベースに取り込み
--- create.sqlはSQliteを想定して作成しています。他のデータベースの場合は、適宜読み替えて下さい。
+ - create.sqlはSQliteを想定して作成しています。
+ - create-postgresql.sqlはPostgreSQLを想定して作成しています。
+ - 他のデータベースの場合は、適宜読み替えて下さい。
 - query.sqlに書かれているサンプルSQLを使って、データが取り込めたか確認
-
+ - query.sqlはSQliteを想定して作成しています。
+ - query-postgresql.sqlはPostgreSQLを想定して作成しています。
