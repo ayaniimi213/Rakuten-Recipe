@@ -6,7 +6,7 @@ opt = "-w -Z1 --no-best-fit-chars -x"
 
 # 楽天レシピ
 #(1).レシピ情報
-#0・レシピID  		：「http://recipe.rakuten.co.jp/[レシピID]」でレシピページのURL
+#0・レシピID    	：「http://recipe.rakuten.co.jp/[レシピID]」でレシピページのURL
 #　　　　　　　　　　　　　　　　　　※全てのレシピページが存在するとは限りません
 #1・ユーザID
 #2・大カテゴリ
