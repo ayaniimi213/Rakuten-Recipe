@@ -40,7 +40,8 @@ while line = gets
     amount = "50g"
   end
 
-  amount.gsub!(/ぐらむ$/, "g")
+  amount.gsub!(/ぐらむ/, "g")
+  amount.gsub!(/しーしー/, "cc")
 
   puts id + "\t" + name + "\t" + amount if name != ""
 
