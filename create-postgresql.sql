@@ -52,10 +52,10 @@ ALTER TABLE recipe_material
 CREATE INDEX recipe_idx on recipe_all("recipeID");
 CREATE INDEX material_idx on recipe_material("recipeID");
 CREATE INDEX material_idx2 on recipe_material(material);
-copy recipe_all from '/tmp/recipe_all_20120705_normalized.txt';
-copy recipe_all from '/tmp/234685.txt';
-copy recipe_all from '/tmp/280174.txt';
-copy recipe_material from '/tmp/recipe_material_20120705_normalized.txt';
+copy recipe_all from 'recipe_all_20120705_normalized.txt';
+copy recipe_all from '234685.txt';
+copy recipe_all from '280174.txt';
+copy recipe_material from 'recipe_material_20120705_normalized.txt';
 
 VACUUM VERBOSE ANALYZE;
 
