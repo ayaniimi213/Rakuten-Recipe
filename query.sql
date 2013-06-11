@@ -1,4 +1,4 @@
-# SQL例文
+# SQL例文(SQLite)
 
 # レシピカテゴリの上位100件
 select category, count(*) as count from recipe group by category order by count DESC limit 100;
