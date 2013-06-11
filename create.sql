@@ -18,6 +18,6 @@ CREATE INDEX tsukurepo_idx on tsukurepo(recipeID);
 
 VACUUM;
 PRAGMA page_count;
-# 200578
 PRAGMA cache_size; 
-PRAGMA cache_size = 201000;
+PRAGMA default_cache_size = 201000;
+PRAGMA temp_store = MEMORY;
