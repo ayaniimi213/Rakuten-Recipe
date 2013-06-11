@@ -30,10 +30,11 @@ FROM recipe_all INNER JOIN recipe_material USING ("recipeID")
  where "Mcategory" = 'パスタ' limit 20;
 
 # レシピタイトルと食材、量を表示（集計表, comma_join()関数を利用）
+# comma_joinは次のサイトからの流用です。 http://miau.s9.xrea.com/blog/?itemid=585
 SELECT recipe_all."recipeID", recipe_all."recipeTitle", 
 CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')  = '適量' THEN 
 '10'
-  WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
+	WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
 		replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')
 	ELSE '0' END AS "塩",
 CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '胡椒' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
@@ -63,7 +64,30 @@ FROM recipe_material INNER JOIN recipe_all USING ("recipeID")
 
 # レシピタイトルと食材、量を表示（集計表, array_to_string()関数を利用）
 SELECT recipe_all."recipeID", recipe_all."recipeTitle", 
-array_to_string(array_agg(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',')
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "塩",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ '胡椒' OR recipe_material.material ~ 'こしょ' OR recipe_material.material ~ 'ぺっぱー' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ '胡椒' OR recipe_material.material ~ 'こしょ' OR recipe_material.material ~ 'ぺっぱー' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "胡椒",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ '醤油' OR recipe_material.material ~ 'しょうゆ' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ '醤油' OR recipe_material.material ~ 'しょうゆ' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "醤油",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ '牛乳' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ '牛乳' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "牛乳",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'ちーず' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'ちーず' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "ちーず",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ '納豆' OR recipe_material.material ~ 'なっとう' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ '納豆' OR recipe_material.material ~ 'なっとう' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "納豆",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'まかろに' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'まかろに' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "まかろに",
+CASE WHEN array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'すぱげてぃ' THEN recipe_material.volume ELSE '' END), '') != '' THEN
+		array_to_string(array_agg(CASE WHEN recipe_material.material ~ 'すぱげてぃ' THEN recipe_material.volume ELSE '' END), '')
+	ELSE '0' END AS "すぱげてぃ"
 
 FROM recipe_material INNER JOIN recipe_all USING ("recipeID")
  where "Mcategory" = 'パスタ' GROUP BY recipe_all."recipeID",recipe_all."recipeTitle"  limit 200;
