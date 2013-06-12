@@ -7,14 +7,17 @@ create table tsukurepo (recipeID, userID, RecommendedComment, OwnerComment, Crea
 .import 'recipe_all_20120705_normalized.txt' recipe
 .import '234685.txt' recipe
 .import '280174.txt' recipe
-CREATE INDEX recipe_idx on recipe(recipeID);
 .import 'recipe_material_20120705_normalized.txt' material 
+.import 'recipe_process_20120705.txt' process
+.import 'recipe_tsukurepo_20120705_normalized.txt' tsukurepo
+
+BEGIN TRANSACTION;
+CREATE INDEX recipe_idx on recipe(recipeID);
 CREATE INDEX material_idx on material(recipeID);
 CREATE INDEX material_idx2 on material(materialName);
-.import 'recipe_process_20120705.txt' process
 CREATE INDEX process_idx on process(recipeID);
-.import 'recipe_tsukurepo_20120705_normalized.txt' tsukurepo
 CREATE INDEX tsukurepo_idx on tsukurepo(recipeID);
+END TRANSACTION;
 
 VACUUM;
 PRAGMA page_count;
