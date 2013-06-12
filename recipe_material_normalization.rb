@@ -22,12 +22,14 @@ while line = gets
 
   # 項目先頭の不要な文字の削除
   (id, name, amount) = line.split("\t", -1)
-  name.gsub!(/^[#\*●○◯★☆■□◆◇\-ー・]*/, "")
+  name.gsub!(/^[#\$\*●○◯★☆■□◆◇\-ー・〜]*/, "")
+  name.gsub!(/[#\$\*●○◯★☆■□◆◇\-ー・〜]*$/, "")
   name.gsub!(/^\(\w\)/, "")
   name.gsub!(/^\w\)/, "")
   name.gsub!(/^\w・/, "")
   name.gsub!(/^[a-z]/, "")
-  amount.gsub!(/^[#\*●○◯★☆■□◆◇\-ー・]*/, "")
+  amount.gsub!(/^[#\$\*●○◯★☆■□◆◇\-ー・〜]*/, "")
+  amount.gsub!(/[#\$\*●○◯★☆■□◆◇\-ー・〜]*$/, "")
 
   name.gsub!(/^\(あれば\)/, "")
 
@@ -40,9 +42,11 @@ while line = gets
     amount = "50g"
   end
 
+  amount.gsub!(/きろぐらむ/, "kg")
   amount.gsub!(/ぐらむ/, "g")
   amount.gsub!(/しーしー/, "cc")
   amount.gsub!(/みりりっとる/, "ml")
+  amount.gsub!(/りっとる/, "l")
 
   puts id + "\t" + name + "\t" + amount if name != ""
 
