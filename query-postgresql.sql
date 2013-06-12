@@ -37,8 +37,8 @@ CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recip
 	WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
 		replace(comma_join(CASE WHEN recipe_material.material ~ '塩' OR recipe_material.material ~ 'しお' THEN recipe_material.volume ELSE '' END), ',', '')
 	ELSE '0' END AS "塩",
-CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '胡椒' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
-		replace(comma_join(CASE WHEN recipe_material.material ~ '胡椒' THEN recipe_material.volume ELSE '' END), ',', '')
+CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '胡椒' OR recipe_material.material ~ 'こしょ' OR recipe_material.material ~ 'ぺっぱー' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
+		replace(comma_join(CASE WHEN recipe_material.material ~ '胡椒' OR recipe_material.material ~ 'こしょ' OR recipe_material.material ~ 'ぺっぱー' THEN recipe_material.volume ELSE '' END), ',', '')
 	ELSE '0' END AS "胡椒",
 CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '醤油' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
 		replace(comma_join(CASE WHEN recipe_material.material ~ '醤油' THEN recipe_material.volume ELSE '' END), ',', '')
@@ -49,8 +49,8 @@ CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '牛乳' THEN 
 CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ 'チーズ' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
 		replace(comma_join(CASE WHEN recipe_material.material ~ 'チーズ' THEN recipe_material.volume ELSE '' END), ',', '')
 	ELSE '0' END AS "チーズ",
-CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '納豆' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
-		replace(comma_join(CASE WHEN recipe_material.material ~ '納豆' THEN recipe_material.volume ELSE '' END), ',', '')
+CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ '納豆' OR recipe_material.material ~ 'なっとう' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
+		replace(comma_join(CASE WHEN recipe_material.material ~ '納豆' OR recipe_material.material ~ 'なっとう' THEN recipe_material.volume ELSE '' END), ',', '')
 	ELSE '0' END AS "納豆",
 CASE WHEN replace(comma_join(CASE WHEN recipe_material.material ~ 'マカロニ' THEN recipe_material.volume ELSE '' END), ',', '')  != '' THEN 
 		replace(comma_join(CASE WHEN recipe_material.material ~ 'マカロニ' THEN recipe_material.volume ELSE '' END), ',', '')
