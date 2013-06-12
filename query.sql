@@ -1,35 +1,35 @@
-# SQL例文(SQLite)
+-- SQL例文(SQLite)
 
-# レシピカテゴリの上位100件
+-- レシピカテゴリの上位100件
 select category, count(*) as count from recipe group by category order by count DESC limit 100;
 
-# レシピ登録ユーザの上位20位
+-- レシピ登録ユーザの上位20位
 select userID, count(*) as count from recipe group by userID order by count DESC limit 20;
-# あるユーザの登録レシピカテゴリ
+-- あるユーザの登録レシピカテゴリ
 select category, count(*) as count from recipe where userID = '1580000101' group by category order by count DESC limit 100;
 select category, count(*) as count from recipe where userID = '1990000160' group by category order by count DESC limit 100;
 select category, count(*) as count from recipe where userID = '1580002407' group by category order by count DESC limit 100;
 
-# よく使われる量の表現
+-- よく使われる量の表現
 select amount, count(*) as count from material group by amount order by count DESC limit 100;
 
-# 使われる食材ランキング
+-- 使われる食材ランキング
 select materialName, count(*) as count from material group by materialName order by count DESC limit 100;
-# 使われない食材ランキング
+-- 使われない食材ランキング
 select materialName, count(*) as count from material group by materialName order by count ASC limit 100;
 
-# 中カテゴリ（パスタ）に登録されている小カテゴリ
+-- 中カテゴリ（パスタ）に登録されている小カテゴリ
 select subsubcategory, count(*) as count from recipe where subcategory = 'パスタ' group by subsubcategory order by count DESC;
 
-# 食材数(重複を除いく)
+-- 食材数(重複を除いく)
 select count(distinct materialName) from material;
 
-# レシピタイトルと食材、量を表示
+-- レシピタイトルと食材、量を表示
 SELECT recipe.recipeID, recipe.title, material.materialName, material.amount
 FROM recipe INNER JOIN material USING (recipeID)
  where subcategory = 'パスタ' limit 20;
 
-# レシピタイトルと食材、量を表示（集計表）、NULL表示はSqliteの設定で表示
+-- レシピタイトルと食材、量を表示（集計表）、NULL表示はSqliteの設定で表示
 .header ON
 .nullvalue 0
 SELECT recipe.recipeID, recipe.title, 
@@ -44,7 +44,7 @@ GROUP_CONCAT(CASE WHEN LIKE('%すぱげてぃ%', material.materialName) THEN mat
 FROM recipe INNER JOIN material USING (recipeID)
  where subcategory = 'パスタ' GROUP BY recipe.recipeID limit 20;
 
-# レシピタイトルと食材、量を表示（集計表）
+-- レシピタイトルと食材、量を表示（集計表）
 .header ON
 SELECT recipe.recipeID, recipe.title, 
 COALESCE(GROUP_CONCAT(CASE WHEN LIKE('%塩%', material.materialName) OR LIKE('%しお%', material.materialName)THEN material.amount END), 0) AS '塩',
