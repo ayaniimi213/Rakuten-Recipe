@@ -114,4 +114,11 @@ volume_join(array_agg(CASE WHEN recipe_material.material ~ 'すぱげてぃ' THE
 FROM recipe_material INNER JOIN recipe_all USING ("recipeID")
  where "Mcategory" = 'パスタ' GROUP BY recipe_all."recipeID",recipe_all."recipeTitle"  limit 200;
 
+-- 食材の表現と量を表示
+select DISTINCT material, volume, count(*) as count from recipe_material group by material, volume having material = '醤油' order by material ASC limit 100;
+
+-- レシピID順に100件分を取り出し、レシピ名と使っている材料を表示
+select r."recipeID", r."recipeTitle", recipe_material.material FROM (select * from recipe_all order by "recipeID" ASC limit 100) as r INNER JOIN  recipe_material using("recipeID") order by "recipeID";
+
+
 
