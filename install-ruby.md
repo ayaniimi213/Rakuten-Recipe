@@ -45,3 +45,8 @@ sudo yum install sqlite-devel
 
 ■ 6. rubyのsqliteライブラリのインストール
 gem install sqlite3
+
+■ 7. norigakiのインストールでこけるようなら
+sudo yum install libxml2-devel
+sudo yum install libxslt-devel
+
