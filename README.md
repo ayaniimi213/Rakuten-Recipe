@@ -5,19 +5,20 @@ Rakuten-Recipe
 情報学研究データリポジトリ 楽天データセット http://www.nii.ac.jp/cscenter/idr/rakuten/rakuten.html
 
 ■ 確認DB
+----
 - SQlite
 - PostgreSQL
 
 PostgreSQLはUTF-8のチェックが厳しいので、いくつかの文字が取り込めないようです。
 
 ■ 必要なライブラリ、ツール
-
+----
 - Ruby
 - nkf
 - sed
 
 ■ 手順
-
+----
 - Rubyが未インストールなら、install-ruby.mdを参考にインストールする。
 - 楽天データセットから楽天レシピを入手
 - normalization.shを使ってデータの正規化
