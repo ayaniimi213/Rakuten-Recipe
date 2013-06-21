@@ -68,12 +68,31 @@ WITH (
 ALTER TABLE recipe_material_gram
   OWNER TO postgres;
 
+-- Table: recipe_selected
+
+-- DROP TABLE recipe_selected;
+
+CREATE TABLE recipe_selected
+(
+  "recipeID" integer NOT NULL,
+  "recipeTitle" text,
+  "materialName" text,
+  "foodID" integer,
+  "Lcategory" text,
+  "Mcategory" text
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE recipe_selected
+  OWNER TO postgres;
 
 
 copy recipe_all from 'recipe_all_20120705_normalized.txt';
 copy recipe_all from '234685.txt';
 copy recipe_all from '280174.txt';
 copy recipe_material from 'recipe_material_20120705_normalized.txt';
+copy recipe_selected from 'rakuten100_6-20.csv' WITH CSV;
 
 CREATE INDEX recipe_idx on recipe_all("recipeID");
 CREATE INDEX material_idx on recipe_material("recipeID");
@@ -82,4 +101,3 @@ CREATE INDEX material_gram_idx on recipe_material_gram("recipeID");
 CREATE INDEX material_gram_idx2 on recipe_material_gram("materialName");
 
 VACUUM VERBOSE ANALYZE;
-
