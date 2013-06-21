@@ -3,8 +3,12 @@
 
 foodIDs = Array.new
 while line = gets
+  # data from 'rakuten100_6-20.csv'
   (recipeID, title, materialName, foodID, category, subcategory ) = line.split(",")
-  
+  # data from 'FoodCompositionTable_modified.csv'
+#  data = line.split(",")
+#  foodID = data[2]
+
   foodIDs << foodID
 end
 puts 'SELECT recipe_selected."recipeID", recipe_selected."recipeTitle"'
