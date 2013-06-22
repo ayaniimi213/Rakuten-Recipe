@@ -19,6 +19,12 @@ PostgreSQLはUTF-8のチェックが厳しいので、いくつかの文字が�
 
 ■ 手順
 ----
+- 本プロジェクトをダウンロード
+
+````bash
+git clone https://github.com/ayaniimi213/Rakuten-Recipe.git
+````
+
 - Rubyが未インストールなら、install-ruby.mdを参考にインストールする。
 
 - 楽天データセットから楽天レシピを入手
