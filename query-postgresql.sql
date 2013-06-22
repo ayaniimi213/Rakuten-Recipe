@@ -99,7 +99,7 @@ CREATE FUNCTION volume_join(anyarray) RETURNS text AS $$
 SELECT 
 CASE WHEN array_to_string($1, '') != '' THEN
 		array_to_string($1, '')
-	ELSE '0' END;
+	ELSE '0.0' END;
 $$ LANGUAGE SQL;
 
 SELECT recipe_all."recipeID", recipe_all."recipeTitle", 
