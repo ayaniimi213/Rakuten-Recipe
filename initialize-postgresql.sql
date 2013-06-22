@@ -51,22 +51,22 @@ ALTER TABLE recipe_material
 
 
 
--- Table: recipe_material_gram
+-- Table: material_gram 
 
--- DROP TABLE recipe_material_gram;
+-- DROP TABLE material_gram; 
 
-CREATE TABLE recipe_material_gram
-(
-  "recipeID" integer,
-  "materialName" text,
-  volume text,
-  gram integer
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE recipe_material_gram
-  OWNER TO postgres;
+CREATE TABLE material_gram 
+( 
+ recipeid integer, 
+ materialname text, 
+ volume text, 
+ gram double precision 
+) 
+WITH ( 
+ OIDS=FALSE 
+); 
+ALTER TABLE material_gram 
+ OWNER TO postgres; 
 
 -- Table: recipe_selected
 
@@ -93,6 +93,8 @@ copy recipe_all from '234685.txt';
 copy recipe_all from '280174.txt';
 copy recipe_material from 'recipe_material_20120705_normalized.txt';
 copy recipe_selected from 'rakuten100_6-20.csv' WITH CSV;
+
+copy material_gram from 'rakuten_gram.txt';
 
 CREATE INDEX recipe_idx on recipe_all("recipeID");
 CREATE INDEX material_idx on recipe_material("recipeID");
