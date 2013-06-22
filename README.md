@@ -20,13 +20,28 @@ PostgreSQLはUTF-8のチェックが厳しいので、いくつかの文字が�
 ■ 手順
 ----
 - Rubyが未インストールなら、install-ruby.mdを参考にインストールする。
+
 - 楽天データセットから楽天レシピを入手
+
 - normalization.shを使ってデータの正規化
  - recipe_all_20120705.txtの234685行目と280174行目を手動で修正
-- create.sqlを使って、データベースに取り込み
- - create.sqlはSQliteを想定して作成しています。
- - create-postgresql.sqlはPostgreSQLを想定して作成しています。
+- initialize-sqlite.sqlを使って、データベースに取り込み
+ - initialize-sqlite.sqlはSQliteを想定して作成しています。
+ - initialize-postgresql.sqlはPostgreSQLを想定して作成しています。
  - 他のデータベースの場合は、適宜読み替えて下さい。
-- query.sqlに書かれているサンプルSQLを使って、データが取り込めたか確認
- - query.sqlはSQliteを想定して作成しています。
+- query-sqlite.sqlに書かれているサンプルSQLを使って、データが取り込めたか確認
+ - query-sqlite.sqlはSQliteを想定して作成しています。
  - query-postgresql.sqlはPostgreSQLを想定して作成しています。
+
+- 食品成分表2010を使ってレシピ毎の材料行列を作成
+ - PostgreSQLの場合
+
+````bash
+ruby create-query4foodmatrix.rb rakuten_gram2-6_21.csv > query.sql
+````
+````bash
+psql < query.sql > result.csv
+````
+````bash
+ruby comvert2complete-matrix.rb FoodCompositionTable_modified.csv result.csv > complete-matrix.csv
+````
