@@ -4,6 +4,7 @@ create table process (recipeID, CookingOrder, CookingText);
 create table tsukurepo (recipeID, userID, RecommendedComment, OwnerComment, CreationDate);
 
 create table recipe_selected (recipeID, title, materialName, foodID, category, subcategory );
+create table material_gram (recipeID, materialName, amount, gram );
 
 .separator \t
 .import 'recipe_all_20120705_normalized.txt' recipe
@@ -15,6 +16,10 @@ create table recipe_selected (recipeID, title, materialName, foodID, category, s
 
 .separator ,
 .import 'rakuten100_6-20.csv' recipe_selected
+
+.separetor \t
+.import 'rakuten_gram.csv' material_gram
+
 
 BEGIN TRANSACTION;
 CREATE INDEX recipe_idx on recipe(recipeID);
