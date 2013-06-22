@@ -3,16 +3,16 @@
 
 foodIDs = Array.new
 while line = gets
-  # data from 'rakuten100_6-20.csv'
-#  (recipeID, title, materialName, foodID, category, subcategory ) = line.split(",")
-  # data from 'FoodCompositionTable_modified.csv'
-  foodID = (line.split(","))[2]
+  # data from 'rakuten_gram2-6_21.csv'
+  line.strip!
+  ( recipeid, materialname, volume, gram, foodnum ) = line.split(",")
+  foodnum.gsub!(/"/, "")
 
-  foodIDs << foodID
+  foodIDs << foodnum
 end
-puts 'SELECT recipe_selected."recipeID", recipe_selected."recipeTitle"'
+puts 'SELECT recipeid'
 foodIDs.sort.uniq.each{|id|
-  puts ', volume_join(array_agg(CASE WHEN "foodID" = ' + id + ' THEN recipe_material.volume ELSE \'\' END))'
+  puts ', volume_join(array_agg(CASE WHEN foodnum ~ \'' + id + '\' THEN gram ELSE null END)) AS "' + id + '"'
 }
-puts 'FROM recipe_selected inner join recipe_material USING ("recipeID")'
-puts 'WHERE recipe_selected."materialName" = recipe_material.material GROUP BY recipe_selected."recipeID", recipe_selected."recipeTitle";'
+puts 'FROM material_gram'
+puts 'GROUP BY recipeid;'
